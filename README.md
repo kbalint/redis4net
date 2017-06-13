@@ -1,3 +1,7 @@
+# Changes to master:
+
+the original lib was lacking Password Auth for Redis. Now you can set it in a remotePassword variable.
+
 # redis4net  
 redis4net is a log4net appender that formats logs and adds them to redis lists. This is useful when you have another system like logstash which indexes yours 
 logs. The redis lists that you write to can feed into the logstash indexer.
@@ -34,6 +38,7 @@ data types of fields within the same "type", will cause logstash indexer to chok
 		<appender name="RedisAppender" type="redis4net.Appender.RedisAppender, redis4net">
 			<remoteAddress value="127.0.0.1" />
 			<remotePort value="6379" />
+			<remotePassword value="S3CR1T" />
 			<listName value="logstash" />
 			<layout type="redis4net.Layout.LogMessageLayout, redis4net">
 				<param name="IncludeLocationInformation" value="true" />

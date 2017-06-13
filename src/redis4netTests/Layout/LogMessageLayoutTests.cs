@@ -198,9 +198,9 @@ namespace redis4netTests.Layout
 			var loggingEvent = GetLogginEvent(message);
 
 			var result = GetMessage(layout, loggingEvent);
-
-			Assert.AreEqual(result["Test"], message.Test.ToString());
-			Assert.AreEqual(result["Test2"], message.Test2.ToString());
+             
+			Assert.AreEqual(result["Test"], message.Test.ToString()); 
+			Assert.AreEqual(result["Test2"], message.Test2.ToString()); 
 			Assert.AreEqual(result.Message, message.ToString());
 		}
 

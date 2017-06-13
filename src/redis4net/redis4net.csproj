@@ -86,4 +86,23 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
+    <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+      <Output TaskParameter="Assemblies" ItemName="AssemblyVersion" />
+    </GetAssemblyIdentity>
+    <Exec Command="nuget pack $(ProjectFileName) -Symbols -IncludeReferencedProjects -Prop Configuration=Release">
+    </Exec>
+    <Exec Command="del /Q /S Nugets">
+    </Exec>
+    <Exec Command="move $(TargetName).%(AssemblyVersion.Version).nupkg Nugets">
+    </Exec>
+    <Exec Command="move $(TargetName).%(AssemblyVersion.Version).symbols.nupkg Nugets">
+    </Exec>
+    <Exec Command="nuget add Nugets\$(TargetName).%(AssemblyVersion.Version).nupkg -source \\kardosb-pc\Packages">
+    </Exec>
+    <Exec Command="nuget add Nugets\$(TargetName).%(AssemblyVersion.Version).symbols.nupkg -source \\kardosb-pc\Packages">
+    </Exec>
+  </Target>
+
+
 </Project>

@@ -216,11 +216,14 @@ namespace redis4netTests.Layout
 			var result = GetMessage(layout, loggingEvent);
 
 			Assert.AreEqual(message, result.Message);
-			Assert.IsNotNullOrEmpty(result.Line);
-			Assert.IsNotNullOrEmpty(result.File);
-		}
+			Assert.IsNotNull(result.Line);
+			Assert.IsNotNull(result.File);
+            Assert.IsNotEmpty(result.Line);
+            Assert.IsNotEmpty(result.File);
 
-		private LogMessage GetMessage(LogMessageLayout layout, LoggingEvent message)
+        }
+
+        private LogMessage GetMessage(LogMessageLayout layout, LoggingEvent message)
 		{
 			var sb = new StringBuilder();
 			using (var sw = new StringWriter(sb))

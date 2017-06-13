@@ -10,12 +10,12 @@ namespace redis4net.Redis
 		private string _listName;
 		private ConnectionMultiplexer redis;
 
-		public void Open(string hostname, int port, string listName)
+		public void Open(string hostname, int port, string password, string listName)
 		{
 			try
 			{
 				_listName = listName;
-				redis = ConnectionMultiplexer.Connect(string.Format("{0}:{1}", hostname, port));
+				redis = ConnectionMultiplexer.Connect(string.Format("{0}:{1},password={2}", hostname, port, password));
 			}
 			catch
 			{
